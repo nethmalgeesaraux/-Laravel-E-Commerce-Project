@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Cartify</title>
 
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,21 +36,21 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
-    <link rel="stylesheet" href="{{asset('assets/css/custom.css') }}" />
+    <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}" />
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 
-<body class="font-sans antialiased text-gray-600 min-h-screen flex flex-col">
+<body class="flex flex-col min-h-screen font-sans antialiased text-gray-600">
 
     <header class="sticky top-0 z-50 hidden bg-white shadow-sm lg:block">
         <div class="container py-4 mx-auto">
             <div class="flex items-center justify-between">
                 <div class="w-1/4">
                     <a href="index.php">
-                        <img src="{{asset('assets/images/logo.') }}" alt="Logo" class="max-w-[200px]" />
+                        <img src="{{asset('assets/images/logo.png') }}" alt="Logo" class="max-w-[200px]" />
                     </a>
                 </div>
 
@@ -178,11 +178,11 @@
 
     <!-- Main Content End -->
 
-    <footer class="mt-auto py-16 text-gray-100 bg-sky-800">
+    <footer class="py-16 mt-auto text-gray-100 bg-sky-800">
         <div class="container px-4 mx-auto">
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
                 <div>
-                    <img src="{{asset('assets/images/logo-w.') }}" alt="Logo" class="mb-6 max-w-[200px]" />
+                    <img src="{{asset('assets/images/logo-w.png') }}" alt="Logo" class="mb-6 max-w-[200px]" />
                     <ul class="space-y-2 text-sm">
                         <li>ABC, Address Here, Country</li>
                         <li>Call Us: <a href="#" class="transition hover:text-primary">+000 000 0000</a></li>
