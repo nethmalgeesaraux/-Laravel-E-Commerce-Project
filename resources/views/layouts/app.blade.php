@@ -86,15 +86,39 @@
 
                     <div class="relative group">
                         <button class="text-2xl hover:text-primary">
-                            <i class="fa-regular fa-user"></i>
-                            <!-- <span class="flex items-center justify-center w-10 h-10 text-lg font-bold text-white uppercase bg-blue-600 rounded-full shadow-sm">
-                            <i class="fa-regular fa-user"></i>
-                        </span> -->
+
+                            @auth
+                            <span class="flex items-center justify-center w-10 h-10 text-lg font-bold text-white uppercase bg-blue-600 rounded-full shadow-sm">
+                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            </span>
+
+                            @else
+                            <span class="flex items-center justify-center w-10 h-10 text-lg font-bold text-white uppercase bg-blue-600 rounded-full shadow-sm">
+                                <i class="fa-regular fa-user"></i>
+                            </span>
+                            @endauth
+
                         </button>
                         <ul class="absolute right-0 z-50 invisible w-40 py-2 mt-2 transition-all duration-300 bg-white border rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible">
-                            <li><a href='login.php' class="block px-4 py-2 text-sm hover:bg-gray-100">Sign In</a></li>
-                            <li><a href='My-Account.php' class="block px-4 py-2 text-sm hover:bg-gray-100">My Account</a></li>
-                            <li><a href="login.php" class="block px-4 py-2 text-sm hover:bg-gray-100">Sign Out</a></li>
+                            @guest
+
+                            <li><a href="{{ route('login') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Sign In</a></li>
+                             <li><a href="{{ route('register') }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Sign Up</a></li>
+
+                            @else
+
+                            <li><a href='{{ Auth::user()->utype=="ADM" ? route("admin.index") : route("users.index") }}'
+                                    class="block px-4 py-2 text-sm hover:bg-gray-100">My Account</a></li>
+                            <li>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-100">Sign Out</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                    @csrf
+                                </form>
+                            </li>
+
+                            @endguest
+
                         </ul>
                     </div>
                 </div>
@@ -441,6 +465,7 @@
     </script>
     </div>
 </body>
+
 </html>
 
 <!-- <body class="font-sans antialiased">
