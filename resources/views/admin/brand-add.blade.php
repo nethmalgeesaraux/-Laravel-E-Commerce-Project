@@ -7,7 +7,8 @@
             </a>
         </div>
         <div class="max-w-3xl mx-auto">
-            <form class="p-8 space-y-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+            <form action="{{ route('admin.brands.store') }}" method="POST" enctype="multipart/form-data" class="p-8 space-y-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+                @csrf
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div>
                         <label class="block mb-1 text-sm font-medium text-gray-700">Brand Name *</label>
