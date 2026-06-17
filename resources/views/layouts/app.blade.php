@@ -16,7 +16,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0369a1', // Adjust this to match your brand blue
+                        primary: '#0369a1',
                         secondary: '#075985',
                     },
                     container: {
