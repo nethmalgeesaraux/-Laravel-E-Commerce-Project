@@ -6,7 +6,7 @@
                 <h1 class="text-2xl font-bold text-gray-800">Brands</h1>
                 <p class="text-sm text-gray-500">Manage product brands and partners</p>
             </div>
-            <a href="brand-add.php" class="bg-primary hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm">
+            <a href="{{route('admin.brand.add')}}" class="bg-primary hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm">
                 <i class="fa-solid fa-plus"></i> Add New Brand
             </a>
         </div>
@@ -50,7 +50,7 @@
                             <td class="px-6 py-4 text-sm text-gray-500">{{ $brand->id }}</td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-center w-12 h-12 border rounded-lg bg-gray-50">
-                                    <img src="{{ asset('uploads/brands') }}/{{ $brand->image }}" class="max-w-[30px] max-h-[30px] object-contain" alt="{{ $brand->name }}" onerror="this.src='https://placehold.co/40x40?text=B'">
+                                    <img src="{{asset('uploads/brands/thumbnails')}}/{{ $brand->image }}" class="max-w-[30px] max-h-[30px] object-contain" alt="{{ $brand->name }}" onerror="this.src='https://placehold.co/40x40?text=B'">
                                 </div>
                             </td>
                             <td class="px-6 py-4">
@@ -86,7 +86,7 @@
                                     <i class="mb-3 text-4xl text-gray-300 fa-solid fa-boxes-stacked"></i>
                                     <h3 class="text-lg font-medium text-gray-900">Brands not available</h3>
                                     <p class="mt-1 text-sm">You haven't added any brands to your store yet.</p>
-                                    <a href="brand-add.php" class="mt-4 text-sm font-medium text-primary hover:underline">
+                                    <a href="{{route('admin.brand.add')}}" class="mt-4 text-sm font-medium text-primary hover:underline">
                                         Add your first brand
                                     </a>
                                 </div>
