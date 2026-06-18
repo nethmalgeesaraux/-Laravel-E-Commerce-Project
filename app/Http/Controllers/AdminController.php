@@ -65,4 +65,12 @@ class AdminController extends Controller
         $brand = Brand::findOrFail($id);
         return view('admin.brand-edit', compact('brand'));
     }
+
+    public function brandDestroy($id)
+    {
+        $brand = Brand::findOrFail($id);
+        $brand->delete();
+
+        return redirect()->route('admin.brands')->with('success', 'Brand deleted successfully!');
+    }
 }

@@ -73,9 +73,13 @@
                                     <a href="{{ route('admin.brand.edit', $brand->id) }}" class="flex items-center justify-center w-8 h-8 text-blue-500 transition rounded-full hover:bg-gray-100" title="Edit">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <button class="flex items-center justify-center w-8 h-8 text-red-500 transition rounded-full hover:bg-gray-100" onclick="deleteBrand(this, 'Samsung', 101)" title="Delete">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
+                                    <form action="{{ route('admin.brand.destroy', $brand->id) }}" method="POST" onsubmit="return confirm('Delete this brand?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="flex items-center justify-center w-8 h-8 text-red-500 transition rounded-full hover:bg-gray-100" title="Delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

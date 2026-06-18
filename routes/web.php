@@ -31,6 +31,7 @@ Route::middleware([AuthAdmin::class])->group(function () {
     Route::post('/admin/brands', [AdminController::class, 'brandStore'])->name('admin.brands.store');
     Route::get('/admin/brands/add', [AdminController::class, 'brandAdd'])->name('admin.brand.add');
     Route::get('/admin/brands/edit/{id}', [AdminController::class, 'brandEdit'])->name('admin.brand.edit');
+    Route::delete('/admin/brands/{id}', [AdminController::class, 'brandDestroy'])->name('admin.brand.destroy');
 });
 
 
