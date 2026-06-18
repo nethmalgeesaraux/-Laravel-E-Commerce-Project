@@ -14,9 +14,26 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function brands()
+    public function brands(Request $request)
     {
-        $brands = Brand::orderBy('id', 'DESC')->paginate(10);
+        $query = Brand::query();
+
+        if ($search = $request->query('search')) {
+            $query->where(function ($sub) use ($search) {
+                $sub->where('name', 'like', "%{$search}%")
+                    ->orWhere('slug', 'like', "%{$search}%");
+            });
+        }
+
+        if ($status = $request->query('status')) {
+            if ($status === 'active') {
+                $query->where('status', 1);
+            } elseif ($status === 'inactive') {
+                $query->where('status', 0);
+            }
+        }
+
+        $brands = $query->orderBy('id', 'DESC')->paginate(10)->withQueryString();
         return view('admin.brands', compact('brands'));
     }
 

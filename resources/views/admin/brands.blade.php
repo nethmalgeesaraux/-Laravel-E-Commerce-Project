@@ -12,22 +12,31 @@
         </div>
 
         <div class="p-4 mb-6 bg-white border border-gray-100 shadow-sm rounded-xl">
-            <div class="flex flex-col justify-between gap-4 md:flex-row">
-                <div class="flex flex-col w-full gap-4 md:flex-row md:w-auto">
-                    <div class="relative w-full md:w-64">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i class="text-gray-400 fa-solid fa-search"></i>
-                        </span>
-                        <input type="text" class="w-full py-2 pl-10 pr-4 text-sm border rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Search brand...">
-                    </div>
+            <form action="{{ route('admin.brands') }}" method="GET">
+                <div class="flex flex-col justify-between gap-4 md:flex-row">
+                    <div class="flex flex-col w-full gap-4 md:flex-row md:w-auto">
+                        <div class="relative w-full md:w-64">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                <i class="text-gray-400 fa-solid fa-search"></i>
+                            </span>
+                            <input name="search" value="{{ request()->query('search') }}" type="text" class="w-full py-2 pl-10 pr-4 text-sm border rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Search brand...">
+                        </div>
 
-                    <select class="w-full px-3 py-2 text-sm text-gray-600 bg-white border rounded-lg md:w-40 focus:outline-none focus:border-primary">
-                        <option value="">All Status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </select>
+                        <select name="status" onchange="this.form.submit()" class="w-full px-3 py-2 text-sm text-gray-600 bg-white border rounded-lg md:w-40 focus:outline-none focus:border-primary">
+                            <option value="">All Status</option>
+                            <option value="active" {{ request()->query('status') === 'active' ? 'selected' : '' }}>Active</option>
+                            <option value="inactive" {{ request()->query('status') === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                        </select>
+
+                        <button type="submit" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white transition rounded-lg bg-primary hover:bg-blue-600">
+                            Search
+                        </button>
+                        <a href="{{ route('admin.brands') }}" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 transition bg-white border border-gray-200 rounded-lg hover:bg-gray-50">
+                            Reset
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-xl">
