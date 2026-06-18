@@ -1,7 +1,7 @@
 <x-admin-layout>
     <main class="flex-1 p-6 overflow-y-auto">
         <div class="flex items-center justify-between mb-6">
-            <h1 class="text-2xl font-bold text-gray-800">Add New Brand</h1>
+            <h1 class="text-2xl font-bold text-gray-800">Edit Brand</h1>
             <a href="brands.php" class="border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2">
                 <i class="fa-solid fa-arrow-left"></i> Back to Brands
             </a>
@@ -12,43 +12,53 @@
                 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <div>
                         <label class="block mb-1 text-sm font-medium text-gray-700">Brand Name </label>
-                        <input type="text" id="name" name="name" placeholder="e.g. Samsung" class="w-full px-4 py-2 border rounded-lg outline-none focus:ring-1 focus:ring-primary">
+                        <input type="text" id="name" name="name" placeholder="e.g. Samsung" class="w-full px-4 py-2 border rounded-lg outline-none focus:ring-1 focus:ring-primary" value="{{$brand->name}}" required>
                         @error('name')
                         <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
                         <label class="block mb-1 text-sm font-medium text-gray-700">Brand Slug</label>
-                        <input type="text" id="slug" name="slug" placeholder="samsung" class="w-full px-4 py-2 border rounded-lg outline-none bg-gray-50">
+                        <input type="text" id="slug" name="slug" placeholder="samsung" class="w-full px-4 py-2 border rounded-lg outline-none bg-gray-50" value="{{$brand->slug}}" required>
                         @error('slug')
                         <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
 
-                <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-700">Brand Logo *</label>
-                    <div class="relative flex items-center justify-center w-full h-40">
+                
+                <div class="flex flex-col items-start gap-8 pt-4 md:flex-row">
+                    <div class="w-full md:w-1/3">
+                        <label class="block mb-2 text-sm font-medium text-gray-700">Current Logo</label>
+                        <div class="flex items-center justify-center w-full h-40 p-4 bg-white border rounded-lg">
+                            <img src="uploads/brands/1.png" class="object-contain max-w-full max-h-full" alt="Brand Logo">
+                        </div>
+                    </div>
 
-                        <label for="brand-image" class="relative flex flex-col items-center justify-center w-full h-full overflow-hidden transition border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                    <div class="w-full md:w-2/3">
+                        <label class="block mb-2 text-sm font-medium text-gray-700">Change Brand Logo</label>
 
-                            <div id="upload-content" class="z-10 flex flex-col items-center justify-center pt-5 pb-6">
-                                <i class="mb-2 text-3xl text-gray-400 fa-solid fa-image"></i>
-                                <p class="text-sm text-gray-500">Upload brand logo (PNG/JPG)</p>
-                            </div>
+                        <div class="relative w-full h-40">
+                            <label for="brand-image" class="relative flex flex-col items-center justify-center w-full h-full overflow-hidden transition border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
 
-                            <img id="image-preview" class="absolute inset-0 z-20 hidden object-contain w-full h-full p-2 bg-white" src="" alt="Logo Preview">
+                                <div id="upload-content" class="z-10 text-center">
+                                    <i class="mb-2 text-3xl text-gray-300 fa-solid fa-image"></i>
+                                    <p class="text-sm text-gray-500">Upload new logo</p>
+                                </div>
 
-                            <input id="brand-image" name="image" type="file" class="hidden" accept="image/png, image/jpeg, image/jpg, image/webp" />
-                        </label>
+                                <img id="image-preview" class="absolute inset-0 z-20 hidden object-contain w-full h-full p-2 bg-white" src="" alt="New Logo Preview">
 
-                        <button type="button" id="remove-logo-btn" class="absolute z-30 flex items-center justify-center hidden w-8 h-8 text-red-500 transition-colors bg-white border border-gray-200 rounded-full shadow-md top-2 right-2 hover:text-white hover:bg-red-500 focus:outline-none" title="Remove image">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
+                                <input type="file" id="brand-image" name="images" class="hidden" accept="image/png, image/jpeg, image/jpg, image/webp" />
+                            </label>
 
+                            <button type="button" id="remove-logo-btn" class="absolute z-30 flex items-center justify-center hidden w-8 h-8 text-red-500 transition-colors bg-white border border-gray-200 rounded-full shadow-md top-2 right-2 hover:text-white hover:bg-red-500 focus:outline-none" title="Remove new image">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
+                
                 <div class="flex items-center gap-2">
                     <input type="checkbox" id="status" name="status" class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary">
                     <label for="status" class="text-sm text-gray-700">Set as Active Brand</label>

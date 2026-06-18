@@ -70,9 +70,9 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <button class="flex items-center justify-center w-8 h-8 text-blue-500 transition rounded-full hover:bg-gray-100" title="Edit">
+                                    <a href="{{ route('admin.brand.edit', $brand->id) }}" class="flex items-center justify-center w-8 h-8 text-blue-500 transition rounded-full hover:bg-gray-100" title="Edit">
                                         <i class="fa-solid fa-pen-to-square"></i>
-                                    </button>
+                                    </a>
                                     <button class="flex items-center justify-center w-8 h-8 text-red-500 transition rounded-full hover:bg-gray-100" onclick="deleteBrand(this, 'Samsung', 101)" title="Delete">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>

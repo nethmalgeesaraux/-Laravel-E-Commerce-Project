@@ -59,4 +59,10 @@ class AdminController extends Controller
 
         Image::decode($image)->resize($width, $height)->save($thumbnailPath . '/' . $imageName);
     }
+
+    public function brandEdit($id)
+    {
+        $brand = Brand::findOrFail($id);
+        return view('admin.brand-edit', compact('brand'));
+    }
 }
