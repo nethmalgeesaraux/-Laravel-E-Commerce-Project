@@ -7,6 +7,10 @@ use App\Models\Brand;
 use Illuminate\Support\Str;
 use Intervention\Image\Laravel\Facades\Image;
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
@@ -189,5 +193,86 @@ class AdminController extends Controller
         $category->delete();
 
         return redirect()->route('admin.categories')->with('success', 'Category deleted successfully!');
+    }
+
+    // -------- Additional admin sections --------
+    public function users()
+    {
+        $users = User::orderBy('created_at', 'DESC')->paginate(15);
+        return view('admin.users', compact('users'));
+    }
+
+    public function userShow($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.user-show', compact('user'));
+    }
+
+    public function orders()
+    {
+        // If orders table doesn't exist, return empty collection
+        if (!Schema::hasTable('orders')) {
+            $orders = collect();
+            return view('admin.orders', compact('orders'));
+        }
+
+        $orders = DB::table('orders')->orderBy('created_at', 'DESC')->paginate(15);
+        return view('admin.orders', compact('orders'));
+    }
+
+    public function orderShow($id)
+    {
+        if (!Schema::hasTable('orders')) {
+            abort(404);
+        }
+
+        $order = DB::table('orders')->where('id', $id)->first();
+        if (!$order) abort(404);
+        return view('admin.order-show', compact('order'));
+    }
+
+    public function reviews()
+    {
+        if (!Schema::hasTable('reviews')) {
+            $reviews = collect();
+            return view('admin.reviews', compact('reviews'));
+        }
+
+        $reviews = DB::table('reviews')->orderBy('created_at', 'DESC')->paginate(15);
+        return view('admin.reviews', compact('reviews'));
+    }
+
+    public function reviewDestroy($id)
+    {
+        if (!Schema::hasTable('reviews')) {
+            return redirect()->route('admin.reviews')->with('error', 'Reviews table not present');
+        }
+
+        DB::table('reviews')->where('id', $id)->delete();
+        return redirect()->route('admin.reviews')->with('success', 'Review deleted');
+    }
+
+    public function settings()
+    {
+        $path = storage_path('app/settings.json');
+        $settings = [];
+        if (file_exists($path)) {
+            $settings = json_decode(file_get_contents($path), true) ?: [];
+        }
+
+        return view('admin.settings', compact('settings'));
+    }
+
+    public function settingsUpdate(Request $request)
+    {
+        $data = $request->validate([
+            'site_name' => 'nullable|string|max:255',
+            'contact_email' => 'nullable|email|max:255',
+        ]);
+
+        $path = storage_path('app/settings.json');
+        file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
+
+        return redirect()->route('admin.settings')->with('success', 'Settings saved');
     }
 }

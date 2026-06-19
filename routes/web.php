@@ -47,6 +47,22 @@ Route::middleware([AuthAdmin::class])->group(function () {
     Route::get('/admin/products/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
     Route::put('/admin/products/{id}', [ProductController::class, 'update'])->name('admin.product.update');
     Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
+
+    // Admin user management
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/users/{id}', [AdminController::class, 'userShow'])->name('admin.user.show');
+
+    // Admin orders (safe if orders table doesn't exist yet)
+    Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+    Route::get('/admin/orders/{id}', [AdminController::class, 'orderShow'])->name('admin.order.show');
+
+    // Admin reviews
+    Route::get('/admin/reviews', [AdminController::class, 'reviews'])->name('admin.reviews');
+    Route::delete('/admin/reviews/{id}', [AdminController::class, 'reviewDestroy'])->name('admin.review.destroy');
+
+    // Admin settings
+    Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
+    Route::post('/admin/settings', [AdminController::class, 'settingsUpdate'])->name('admin.settings.update');
 });
 
 

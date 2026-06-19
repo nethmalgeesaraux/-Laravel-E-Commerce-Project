@@ -57,44 +57,50 @@
 
             <div class="flex-1 py-4 overflow-y-auto">
                 <nav class="px-4 space-y-2">
-                    <a href="{{route('admin.index')}}" class="nav-link flex items-center gap-3 px-4 py-2.5 text-gray-100 hover:text-white hover:bg-gray-800 rounded-lg transition">
+                    <a href="{{ route('admin.index') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition{{ request()->routeIs('admin.index') ? 'bg-sky-700 text-white shadow-md' : 'text-gray-100 hover:bg-gray-800' }}">
                         <i class="w-5 text-center fa-solid fa-gauge-high"></i>
                         <span>Dashboard</span>
                     </a>
 
-                    <p class="px-4 mt-4 mb-2 text-xs font-semibold text-gray-300 uppercase">Management</p>
-
-                    <a href="{{route('admin.products')}}" class="nav-link flex items-center gap-3 px-4 py-2.5 text-gray-100 hover:text-white hover:bg-gray-800 rounded-lg transition">
+                    <a href="{{ route('admin.products') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition{{ request()->routeIs('admin.products*') || request()->routeIs('admin.product.*') ? 'bg-sky-700 text-white shadow-md' : 'text-gray-100 hover:bg-gray-800' }}">
                         <i class="w-5 text-center fa-solid fa-box"></i>
                         <span>Products</span>
                     </a>
 
-                    <a href="{{route('admin.categories')}}" class="nav-link flex items-center gap-3 px-4 py-2.5 text-gray-100 hover:text-white hover:bg-gray-800 rounded-lg transition">
+                    <a href="{{ route('admin.categories') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition{{ request()->routeIs('admin.categories*') || request()->routeIs('admin.category.*') ? 'bg-sky-700 text-white shadow-md' : 'text-gray-100 hover:bg-gray-800' }}">
                         <i class="w-5 text-center fa-solid fa-layer-group"></i>
-                        <span class="font-medium">Categories</span>
+                        <span>Categories</span>
                     </a>
 
-                    <a href="{{route('admin.brands')}}" class="nav-link flex items-center gap-3 px-4 py-2.5 text-gray-100 hover:text-white hover:bg-gray-800 rounded-lg transition">
+                    <a href="{{ route('admin.brands') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition{{ request()->routeIs('admin.brands*') || request()->routeIs('admin.brand.*') ? 'bg-sky-700 text-white shadow-md' : 'text-gray-100 hover:bg-gray-800' }}">
                         <i class="w-5 text-center fa-solid fa-tag"></i>
                         <span>Brands</span>
                     </a>
 
-                    <a href="orders.php" class="nav-link flex items-center gap-3 px-4 py-2.5 text-gray-100 hover:text-white hover:bg-gray-800 rounded-lg transition">
+                    <a href="{{ route('admin.orders') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition{{ request()->routeIs('admin.orders*') || request()->routeIs('admin.order.*') ? 'bg-sky-700 text-white shadow-md' : 'text-gray-100 hover:bg-gray-800' }}">
                         <i class="w-5 text-center fa-solid fa-cart-shopping"></i>
                         <span>Orders</span>
                     </a>
-                    <a href="customers.php" class="nav-link flex items-center gap-3 px-4 py-2.5 text-gray-100 hover:text-white hover:bg-gray-800 rounded-lg transition">
+
+                    <a href="{{ route('admin.users') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition{{ request()->routeIs('admin.users*') || request()->routeIs('admin.user.*') ? 'bg-sky-700 text-white shadow-md' : 'text-gray-100 hover:bg-gray-800' }}">
                         <i class="w-5 text-center fa-solid fa-users"></i>
                         <span>Customers</span>
                     </a>
-                    <a href="reviews.php" class="nav-link flex items-center gap-3 px-4 py-2.5 text-gray-100 hover:text-white hover:bg-gray-800 rounded-lg transition">
+
+                    <a href="{{ route('admin.reviews') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition{{ request()->routeIs('admin.reviews*') ? 'bg-sky-700 text-white shadow-md' : 'text-gray-100 hover:bg-gray-800' }}">
                         <i class="w-5 text-center fa-regular fa-star"></i>
                         <span>Reviews</span>
                     </a>
 
-                    <p class="px-4 mt-4 mb-2 text-xs font-semibold text-gray-300 uppercase">Settings</p>
-
-                    <a href="settings.php" class="nav-link flex items-center gap-3 px-4 py-2.5 text-gray-100 hover:text-white hover:bg-gray-800 rounded-lg transition">
+                    <a href="{{ route('admin.settings') }}"
+                        class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition{{ request()->routeIs('admin.settings*') ? 'bg-sky-700 text-white shadow-md' : 'text-gray-100 hover:bg-gray-800' }}">
                         <i class="w-5 text-center fa-solid fa-gear"></i>
                         <span>General Settings</span>
                     </a>
