@@ -47,6 +47,7 @@
                             <th class="px-6 py-4">ID</th>
                             <th class="px-6 py-4">Logo</th>
                             <th class="px-6 py-4">Category Name</th>
+                            <th class="px-6 py-4">Parent</th>
                             <th class="px-6 py-4">Slug</th>
                             <th class="px-6 py-4">Products</th>
                             <th class="px-6 py-4">Status</th>
@@ -65,6 +66,7 @@
                             <td class="px-6 py-4">
                                 <span class="font-semibold text-gray-800">{{ $category->name }}</span>
                             </td>
+                            <td class="px-6 py-4 text-sm text-gray-600">{{ $category->parent?->name ?? '—' }}</td>
                             <td class="px-6 py-4 text-sm text-gray-600">{{ $category->slug }}</td>
                             <td class="px-6 py-4">
                                 <span class="px-2 py-1 text-xs font-semibold text-blue-700 rounded bg-blue-50">0</span>

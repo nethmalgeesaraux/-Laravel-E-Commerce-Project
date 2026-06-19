@@ -58,6 +58,19 @@
                     </div>
                 </div>
 
+                <div>
+                    <label class="block mb-1 text-sm font-medium text-gray-700">Parent Category</label>
+                    <select name="parent_id" class="w-full px-4 py-2 border rounded-lg outline-none focus:ring-1 focus:ring-primary">
+                        <option value="">-- None (Top-level category) --</option>
+                        @foreach($parentCategories as $parentCategory)
+                        <option value="{{ $parentCategory->id }}" {{ old('parent_id', $category->parent_id) == $parentCategory->id ? 'selected' : '' }}>{{ $parentCategory->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('parent_id')
+                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <div class="flex items-center gap-2">
                     <input type="checkbox" id="status" name="status" class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary" {{ old('status', $category->status) ? 'checked' : '' }}>
                     <label for="status" class="text-sm text-gray-700">Set as Active Category</label>

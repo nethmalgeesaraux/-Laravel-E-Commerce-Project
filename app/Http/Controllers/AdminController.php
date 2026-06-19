@@ -41,7 +41,8 @@ class AdminController extends Controller
 
     public function brandAdd()
     {
-        return view('admin.brand-add');
+        $parentCategories = Category::where('parent_id', null)->orderBy('name', 'ASC')->get();
+        return view('admin.category-add', compact('parentCategories'));
     }
 
     public function brandStore(Request $request)
@@ -95,7 +96,7 @@ class AdminController extends Controller
 
     public function categories()
     {
-        $query = Category::query();
+        $query = Category::with('parent');
 
         if ($search = request('search')) {
             $query->where('name', 'LIKE', "%{$search}%")
@@ -116,7 +117,8 @@ class AdminController extends Controller
 
     public function categoryAdd()
     {
-        return view('admin.category-add');
+        $parentCategories = Category::whereNull('parent_id')->orderBy('name', 'ASC')->get();
+        return view('admin.category-add', compact('parentCategories'));
     }
 
     public function categoryStore(Request $request)
@@ -126,12 +128,14 @@ class AdminController extends Controller
             'slug' => 'nullable|string|max:255|unique:categories,slug',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'nullable|boolean',
+            'parent_id' => 'nullable|exists:categories,id',
         ]);
 
         $category = new Category();
         $category->name = $request->name;
         $category->slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->name);
         $category->status = $request->has('status') ? 1 : 0;
+        $category->parent_id = $request->parent_id;
 
         if ($request->hasFile('image')) {
             $imageName = time() . '_' . uniqid() . '.' . $request->image->extension();
@@ -147,7 +151,8 @@ class AdminController extends Controller
     public function categoryEdit($id)
     {
         $category = Category::findOrFail($id);
-        return view('admin.category-edit', compact('category'));
+        $parentCategories = Category::whereNull('parent_id')->where('id', '!=', $category->id)->orderBy('name', 'ASC')->get();
+        return view('admin.category-edit', compact('category', 'parentCategories'));
     }
 
     public function categoryUpdate(Request $request, $id)
@@ -159,11 +164,13 @@ class AdminController extends Controller
             'slug' => 'nullable|string|max:255|unique:categories,slug,' . $category->id,
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'nullable|boolean',
+            'parent_id' => 'nullable|exists:categories,id',
         ]);
 
         $category->name = $request->name;
         $category->slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->name);
         $category->status = $request->has('status') ? 1 : 0;
+        $category->parent_id = $request->parent_id;
 
         if ($request->hasFile('image')) {
             $imageName = time() . '_' . uniqid() . '.' . $request->image->extension();
