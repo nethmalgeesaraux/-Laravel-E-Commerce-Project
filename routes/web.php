@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use App\Http\Middleware\AuthAdmin;
 
 
@@ -39,6 +40,13 @@ Route::middleware([AuthAdmin::class])->group(function () {
     Route::get('/admin/categories/edit/{id}', [AdminController::class, 'categoryEdit'])->name('admin.category.edit');
     Route::put('/admin/categories/{id}', [AdminController::class, 'categoryUpdate'])->name('admin.category.update');
     Route::delete('/admin/categories/{id}', [AdminController::class, 'categoryDestroy'])->name('admin.category.destroy');
+
+    Route::get('/admin/products', [ProductController::class, 'products'])->name('admin.products');
+    Route::get('/admin/products/add', [ProductController::class, 'create'])->name('admin.product.add');
+    Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::get('/admin/products/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
+    Route::put('/admin/products/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+    Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
 });
 
 
